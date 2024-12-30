@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 const CardItems = ({ item, user }) => {
-  console.log("user", user);
   const router = useRouter();
   const handleContactNow = (userId) => {
     console.log("userId", userId);

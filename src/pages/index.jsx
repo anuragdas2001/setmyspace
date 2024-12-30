@@ -14,7 +14,6 @@ const Home = () => {
   useEffect(() => {
     FetchUser();
   }, []);
-  console.log("users", users);
   return (
     <div>
       <Banner />
