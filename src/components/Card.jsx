@@ -80,21 +80,24 @@ const Card = () => {
 
       {/* Grid of cards */}
       <div className="grid grid-cols-12">
-        <div className="col-span-2 text-lg  text-center text-[#8E44AD] font-semibold   ">
-          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 m-8   h-14 w-60">
+        {/* Left Section: Tags */}
+        <div className="col-span-12 sm:col-span-3 lg:col-span-2 text-xl sm:text-sm md:text-base text-center text-[#8E44AD] font-semibold flex flex-col space-y-4 p-1 ">
+          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 h-14">
             Birthday Special Decors
           </div>
-          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 m-8   h-14 w-60">
+          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 h-14">
             Candle Dinners
           </div>
-          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD]  hover:text-white rounded-lg p-2 m-8   h-14 w-60">
+          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 h-14">
             Birthday Cakes
           </div>
-          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 m-8   h-14 w-60">
+          <div className="border-2 border-[#8E44AD] hover:bg-[#8E44AD] hover:text-white rounded-lg p-2 h-14">
             Birthday Surprises
           </div>
         </div>
-        <div className="grid col-span-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 p-6">
+
+        {/* Right Section: Cards */}
+        <div className="col-span-12 sm:col-span-9 lg:col-span-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           {BirthdayDecorators.map((item, index) => (
             <CardItems key={index} item={item} />
           ))}
