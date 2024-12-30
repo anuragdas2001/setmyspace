@@ -1,6 +1,7 @@
 // Card.js
-import CardItems from "./CardItems";
+"use client";
 
+import CardItems from "./CardItems";
 const BirthdayDecorators = [
   {
     name: "Paste and Gold Birthday decor",
@@ -70,7 +71,7 @@ const BirthdayDecorators = [
   },
 ];
 
-const Card = () => {
+const Card = ({ users }) => {
   return (
     <div className="mt-32">
       {/* Heading */}
@@ -99,7 +100,11 @@ const Card = () => {
         {/* Right Section: Cards */}
         <div className="col-span-12 sm:col-span-9 lg:col-span-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           {BirthdayDecorators.map((item, index) => (
-            <CardItems key={index} item={item} />
+            <CardItems
+              key={index}
+              item={item}
+              user={users[index]} 
+            />
           ))}
         </div>
       </div>

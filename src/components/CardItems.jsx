@@ -1,7 +1,21 @@
 import React from "react";
-import { Heart, Share2, Star, MapPin, MessageSquare } from "lucide-react";
-
-const CardItems = ({ item }) => {
+import {
+  Heart,
+  Share2,
+  Star,
+  MapPin,
+  MessageSquare,
+  Mail,
+  Phone,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+const CardItems = ({ item, user }) => {
+  console.log("user", user);
+  const router = useRouter();
+  const handleContactNow = (userId) => {
+    console.log("userId", userId);
+    router.push(`/contact/${userId}`);
+  };
   return (
     <div className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
       {/* Image Container */}
@@ -29,9 +43,7 @@ const CardItems = ({ item }) => {
         {/* Price Tag - Right-aligned */}
         <div className="flex justify-end -mt-2 mb-2">
           <div className="bg-[#8E44AD] px-4 py-1 rounded-bl-xl">
-            <p className="text-lg font-medium text-white">
-              ₨. {item.price}
-            </p>
+            <p className="text-lg font-medium text-white">₨. {item.price}</p>
           </div>
         </div>
 
@@ -44,16 +56,38 @@ const CardItems = ({ item }) => {
           {/* Decorator Info with Avatar */}
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-              <img
-                src={item.decoratorImg}
-                alt={item.decoratorName}
-                className="w-full h-full object-cover"
-              />
+              {user ? (
+                <img
+                  src={user.image}
+                  alt={`${user.firstName} ${user.lastName}`}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={item.decoratorImg}
+                  alt={item.decoratorName}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
             <p className="text-sm font-medium text-gray-600">
-              {item.decoratorName}
+              {user ? `${user.firstName} ${user.lastName}` : item.decoratorName}
             </p>
           </div>
+
+          {/* Contact Information */}
+          {user && (
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Mail className="h-4 w-4" />
+                <span>{user.email}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Phone className="h-4 w-4" />
+                <span>{user.phone}</span>
+              </div>
+            </div>
+          )}
 
           {/* Rating and Reviews */}
           <div className="flex items-center gap-4">
@@ -72,13 +106,20 @@ const CardItems = ({ item }) => {
           {/* Location */}
           <div className="flex items-center gap-1 text-gray-600">
             <MapPin className="h-4 w-4" color="#DE3163" />
-            <span className="text-sm">{item.location}</span>
+            <span className="text-sm">
+              {user
+                ? `${user.address.city}, ${user.address.stateCode}`
+                : item.location}
+            </span>
           </div>
         </div>
 
         {/* Action Button */}
-        <div className="flex items-center justify-end mt-4 pt-4  ">
-          <button className="px-4 py-2 w-full m-3 border-2 border-[#DE3163] text-[#DE3163] rounded-lg font-semibold hover:bg-[#DE3163] hover:text-white transition-colors">
+        <div className="flex items-center justify-end mt-4 pt-4">
+          <button
+            onClick={()=>handleContactNow(user.id)}
+            className="px-4 py-2 w-full m-3 border-2 border-[#DE3163] text-[#DE3163] rounded-lg font-semibold hover:bg-[#DE3163] hover:text-white transition-colors"
+          >
             CONTACT NOW
           </button>
         </div>
