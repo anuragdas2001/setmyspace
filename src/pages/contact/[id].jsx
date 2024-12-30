@@ -1,21 +1,26 @@
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const ContactId = () => {
-  const {id} = useParams();
+  const router = useRouter();
+  const { id } = router.query;
   const [userInfo, setUserInfo] = useState(null);
   console.log(id);
   const FetchUserInfo = async () => {
     const response = await axios.get(`https://dummyjson.com/users/${id}`);
-    console.log(response.data)
+    console.log(response.data);
     setUserInfo(response.data);
   };
   useEffect(() => {
     FetchUserInfo();
   }, [id]);
   if (!userInfo) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        Loading...
+      </div>
+    );
   }
   console.log(userInfo);
   return (
